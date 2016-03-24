@@ -1,0 +1,7 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+tests/*
+^packrat/
+.Rprofile
+^\.travis\.yml$
+^appveyor\.yml$
