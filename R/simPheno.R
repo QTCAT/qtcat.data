@@ -33,7 +33,7 @@ snpProb <- function(gene.pos, snp.pos, bw = 10000) {
 }
 
 
-#' Simulates a normal distributed phenotype with effects either even, normal 
+#' Simulates a normal distributed phenotype with effects either normal 
 #' or gamma distributed.
 #' 
 #' @param snp An object of S4 class \linkS4class{snpData}.
@@ -51,12 +51,9 @@ snpProb <- function(gene.pos, snp.pos, bw = 10000) {
 #' @importFrom qtcat getPos as.matrix
 #' @export
 normalPheno <- function(snp, n.rep = 1, n.loci = 50, h2 = .5, snp.probs = NULL,
-                        eff.dist = c("gaussian", "gamma", "even"), shape = .5) {
-  eff.dist <- match.arg(eff.dist, c("gaussian", "gamma", "even"))
-  if (eff.dist == "even") {
-    loci.eff <- sample(c(-1, 1), size = n.loci, replace = TRUE)
-    
-  } else if (eff.dist == "gamma") {
+                        eff.dist = c("gaussian", "gamma"), shape = .5) {
+  eff.dist <- match.arg(eff.dist, c("gaussian", "gamma"))
+  if (eff.dist == "gamma") {
     eff.sign <- sample(c(-1, 1), size = n.loci, replace = TRUE) 
     loci.eff <- rgamma(n.loci, shape) * eff.sign
   } else {
@@ -79,7 +76,7 @@ normalPheno <- function(snp, n.rep = 1, n.loci = 50, h2 = .5, snp.probs = NULL,
 }
 
 
-#' Simulates a Bernoulli distributed phenotype with effects either even, normal 
+#' Simulates a Bernoulli distributed phenotype with effects either normal 
 #' or gamma distributed.
 #' 
 #' @param snp An object of S4 class \linkS4class{snpData}.
@@ -97,11 +94,9 @@ normalPheno <- function(snp, n.rep = 1, n.loci = 50, h2 = .5, snp.probs = NULL,
 #' @importFrom qtcat getPos as.matrix
 #' @export
 bernoulliPheno <- function(snp, n.rep = 1, n.loci = 50,  h2, snp.probs = NULL,
-                        eff.dist = c("gaussian", "gamma", "even"), shape = .5) {
-  eff.dist <- match.arg(eff.dist, c("gaussian", "gamma", "even"))
-  if (eff.dist == "even") {
-    loci.eff <- sample(c(-1, 1), size = n.loci, replace = TRUE)
-  } else if (eff.dist == "gamma") {
+                        eff.dist = c("gaussian", "gamma"), shape = .5) {
+  eff.dist <- match.arg(eff.dist, c("gaussian", "gamma"))
+ if (eff.dist == "gamma") {
     eff.sign <- sample(c(-1, 1), size = n.loci, replace = TRUE) 
     loci.eff <- rgamma(n.loci, shape) * eff.sign
   } else {

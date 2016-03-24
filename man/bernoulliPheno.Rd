@@ -2,11 +2,11 @@
 % Please edit documentation in R/simPheno.R
 \name{bernoulliPheno}
 \alias{bernoulliPheno}
-\title{Simulates a Bernoulli distributed phenotype with effects either even, normal 
+\title{Simulates a Bernoulli distributed phenotype with effects either normal 
 or gamma distributed.}
 \usage{
 bernoulliPheno(snp, n.rep = 1, n.loci = 50, h2, snp.probs = NULL,
-  eff.dist = c("gaussian", "gamma", "even"), shape = 0.5)
+  eff.dist = c("gaussian", "gamma"), shape = 0.5)
 }
 \arguments{
 \item{snp}{An object of S4 class \linkS4class{snpData}.}
@@ -27,7 +27,7 @@ as a causal loci.}
 gamma').}
 }
 \description{
-Simulates a Bernoulli distributed phenotype with effects either even, normal 
+Simulates a Bernoulli distributed phenotype with effects either normal 
 or gamma distributed.
 }
 
