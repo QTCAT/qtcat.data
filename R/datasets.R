@@ -1,6 +1,6 @@
 #' An Arabidopsis thaliana SNP data object.
 #'
-#' A dataset of 1307 Arabidopsis thaliana accesions genotyped and 214051 SNPs. 
+#' A dataset of 1307 Arabidopsis thaliana accessions genotyped and 214051 SNPs. 
 #' The data required 285 Mb of memory only to be loaded, so make sure your 
 #' memory is big enough. 
 #'
@@ -14,7 +14,7 @@
 #' Accessions from the RegMap Panel. Nature Genetics 44 (2): 212-16. 
 #' \url{http://doi.org/10.1038/ng.1042.} 
 #' 
-#' Data are avalebel from: 
+#' Data are available from: 
 #' \url{http://bergelson.uchicago.edu/wp-content/uploads/2015/04/call_method_75.tar.gz}
 "snp"
 

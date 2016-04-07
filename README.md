@@ -1,4 +1,5 @@
 # QTCAT in action
+***This package contains a huge genetic data set of Arabidopsis, only analyse this data if you have at least 6 GB free RAM. Even this can be not enough, if you copy the data around during analysis.***
 
 The purpose of this package is the illustration QTCAT at a real genetic data set with simulated phenotypes.  It allows the user to create phenotype simulation similar to Klasen et al. (under review).
 
@@ -16,13 +17,13 @@ require(qtcat.data)
 #------------------------------------------------------------------------------#
 # load data
 data("snp")
-data("gene_pos")
+data("genepos")
 
 #------------------------------------------------------------------------------#
 # Simulate a phenotype
 
 # gene density to SNP probabilities
-snpp <- snpProb(gene.pos = t(gene_pos), snp.pos = getPos(snp))
+snpp <- snpProb(gene.pos = t(genepos), snp.pos = getPos(snp))
 
 # phenotype with 50 loci
 pdat <- normalPheno(snp = snp,             # SNP data object
@@ -42,10 +43,10 @@ The first step of the analysis is the clustering of all SNP data.  It can take a
 ```{R}
 #------------------------------------------------------------------------------#
 # clustering of the SNPs
-# !!! this step can easily take days if done only at one core
-snpclust <- qtcatClust(snp = snp)
+# !!! this step can easily take a day or so if done only at one core
 # or load the SNP clustering insted
 # data(snpclust)
+snpclust <- qtcatClust(snp = snp)
 
 ```
 

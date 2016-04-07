@@ -18,12 +18,12 @@ effects at the phenotype are simulated.}
 
 \item{h2}{Trait heritability.}
 
-\item{snp.probs}{A verctor of probertibilities for each SNP to be selected 
+\item{snp.probs}{A vector of probabilities for each SNP to be selected 
 as a causal loci.}
 
 \item{eff.dist}{Distribution from which the effects are drown.}
 
-\item{shape}{See \code{\link[stats]{rgamma}} (only considert if 'eff.dist = 
+\item{shape}{See \code{\link[stats]{rgamma}} (only considered if 'eff.dist = 
 gamma').}
 }
 \description{
