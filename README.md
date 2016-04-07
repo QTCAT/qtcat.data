@@ -76,9 +76,8 @@ geno <- qtcatGeno(snp = snp,
                   snpClust = snpclust,
                   min.absCor = 0.3)     # ignor evrthing less  correlated
 
-
 #------------------------------------------------------------------------------#
-## run the core
+## run the core analysis, the HIT
 hitfit <- qtcatHit(pheno, geno)
 (result <- qtcatQtc(hitfit, alpha = 0.05))
 
