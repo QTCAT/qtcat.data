@@ -1,15 +1,27 @@
-# QTCAT in action
-***This package contains a huge genetic data set of Arabidopsis, only analyse this data if you have at least 6 GB free RAM. Even this can be not enough, if you copy the data around during analysis.***
+# QTCAT workflow
 
-The purpose of this package is the illustration QTCAT at a real genetic data set with simulated phenotypes.  It allows the user to create phenotype simulation similar to Klasen et al. (under review).
+***This package contains a huge genetic data set of Arabidopsis, only analyse this data if you have at least 8 GB free RAM.  Even this can be not enough, if you copy the data around during analysis.***
+
+The purpose of this package is the illustration [QTCAT](https://github.com/QTCAT/qtcat) at a real genetic data set with simulated phenotypes.  It allows the user to create phenotype simulation similar to Klasen et al. (under review).
 
 This package includes a data set of 1,307 Arabidopsis accessions genotyped for 214,051 SNP (Horton 2012) and functions to simulate phenotypes on top of this data set.
 
 ________________________________________________________________________________
 
-## Example of QTCAT usage
+## QTCAT in action
+### Installation:
+The package can be installed from an R console via devtools (If you haven't yet installed devtools please do so first).
 
-### Simulation of a phenotype
+```{R}
+# installation
+# install.packages("devtools")
+devtools::install_github("QTCAT/qtcat") 
+devtools::install_github("QTCAT/qtcat.data") 
+
+```
+
+### Simulation of a phenotype:
+
 ```{R}
 require(qtcat)
 require(qtcat.data)
@@ -37,20 +49,19 @@ pdat <- normalPheno(snp = snp,             # SNP data object
 
 The SNP data together with phenotype give us a full GWA data set.
 
-### QTCAT analysis
-The first step of the analysis is the clustering of all SNP data.  It can take a substantial amount of time, however it has to be done only once per SNP data set.  The package includes clustering result for the Arabidopsis SNP data set which would allows directly moving to the HIT analysis below.
+### QTCAT analysis:
+The first step of the analysis is the clustering of all SNP data.  It can take a substantial amount of time, however, it has to be done only once per SNP data set.  The package includes clustering result for the Arabidopsis SNP data set, which would allows directly moving to the HIT analysis below.
 
 ```{R}
 #------------------------------------------------------------------------------#
 # clustering of the SNPs
 # !!! this step can easily take a day or so if done only at one core
-# or load the SNP clustering insted
-# data(snpclust)
+# data(snpclust) # instead of running the SNP clustering you can load it from the package
 snpclust <- qtcatClust(snp = snp)
 
 ```
 
-The actual testing procedure is the hit algorithm. The function uses a phenotype object containing the actual phenotype and eventual covariates (e.g. environment). Second a genotype object is needed containing SNP information and indices generated from the clustering. From this significant QTCs are estimated. The procedure is described in Klasen et al. (under review).
+The actual testing procedure is the HIT algorithm. The function uses a phenotype object containing the actual phenotype and eventual covariates (e.g. environment).  Second a genotype object is needed containing SNP information and indices generated from the clustering.  From this significant QTCs are estimated. The procedure is described in Klasen et al. (under review).
 
 ```{R}
 #------------------------------------------------------------------------------#
@@ -63,7 +74,7 @@ pheno <- qtcatPheno(names = pdat$pheno$id,
 # create a genotype object for the HIT analysis
 geno <- qtcatGeno(snp = snp,
                   snpClust = snpclust,
-                  max.height = .3)     # ignor evrthing less  correlated
+                  min.absCor = 0.3)     # ignor evrthing less  correlated
 
 
 #------------------------------------------------------------------------------#
@@ -72,10 +83,18 @@ hitfit <- qtcatHit(pheno, geno)
 (result <- qtcatQtc(hitfit, alpha = 0.05))
 
 ```
-The results represents all significant QTCs at a given alpha level. As QTCAT is a model selection method it is not giving p-values for the non selected SNPs.
+
+The results represents all significant QTCs at a given alpha level.  As QTCAT is a model selection method it is not giving p-values for the non selected SNPs.
 
 ________________________________________________________________________________
 
 __Litriture__
 
 Horton, M. W. et al. Genome-wide patterns of genetic variation in worldwide Arabidopsis thaliana accessions from the RegMap panel. Nat. Genet. 44, 212–216 (2012).
+
+Klasen et al. (under review).
+
+________________________________________________________________________________
+
+[![License](https://img.shields.io/badge/license-GPL%20%28%3E=%202%29-brightgreen.svg)](https://www.gnu.org/licenses/gpl-2.0.html)
+&copy; 2015 JR Klasen

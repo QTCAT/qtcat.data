@@ -2,7 +2,7 @@ Package: qtcat.data
 Title: Quantitative Trait Cluster Association Test Datasets
 Description: Data sets and simulation tools for QTCAT.
     ***This package contains a huge genetic data set of Arabidopsis, only analyse this data 
-    if you have at least 6 GB free RAM. Even this can be not enough, if you copy the data 
+    if you have at least 8 GB free RAM. Even this can be not enough, if you copy the data 
     around during analysis.***
 Authors@R: c(person("Jonas", "Klasen", role = c("aut", "cre"),
                     email = "qtcat@gmx.de"))
