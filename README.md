@@ -1,10 +1,13 @@
+---
+output: html_document
+---
 # QTCAT workflow
 
 ***This package contains a huge genetic data set of Arabidopsis, only analyse this data if you have at least 8 GB free RAM.  Even this can be not enough, if you copy the data around during analysis.***
 
 The purpose of this package is the illustration [QTCAT](https://github.com/QTCAT/qtcat) at a real genetic data set with simulated phenotypes.  It allows the user to create phenotype simulation similar to Klasen et al. (under review).
 
-This package includes a data set of 1,307 Arabidopsis accessions genotyped for 214,051 SNP (Horton 2012) and functions to simulate phenotypes on top of this data set.
+This package includes a data set of 1,307 Arabidopsis accessions genotyped for 214,051 SNP (Horton et al. 2012) and functions to simulate phenotypes on top of this data set.
 
 ________________________________________________________________________________
 
@@ -74,7 +77,7 @@ pheno <- qtcatPheno(names = pdat$pheno$id,
 # create a genotype object for the HIT analysis
 geno <- qtcatGeno(snp = snp,
                   snpClust = snpclust,
-                  min.absCor = 0.3)     # ignor evrthing less  correlated
+                  min.absCor = 0.3) # ignore everything below this correlation
 
 #------------------------------------------------------------------------------#
 ## run the core analysis, the HIT
@@ -89,9 +92,9 @@ ________________________________________________________________________________
 
 __Litriture__
 
-Horton, M. W. et al. Genome-wide patterns of genetic variation in worldwide Arabidopsis thaliana accessions from the RegMap panel. Nat. Genet. 44, 212–216 (2012).
+Klasen et al. A multi-marker association method for genome-wide association studies without the need for population structure correction (under review).
 
-Klasen et al. (under review).
+Horton et al. Genome-wide patterns of genetic variation in worldwide Arabidopsis thaliana accessions from the RegMap panel. Nat. Genet. 44, 212–216 (2012).
 
 ________________________________________________________________________________
 
