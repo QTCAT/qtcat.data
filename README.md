@@ -1,6 +1,4 @@
----
-output: html_document
----
+
 # QTCAT workflow
 
 ***This package contains a huge genetic data set of Arabidopsis, only analyse this data if you have at least 8 GB free RAM.  Even this can be not enough, if you copy the data around during analysis.***
