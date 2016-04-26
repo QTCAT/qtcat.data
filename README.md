@@ -1,16 +1,16 @@
 # QTCAT workflow
 
-***This package contains a huge genetic data set of Arabidopsis, only analyse this data if you have at least 8 GB free RAM.  Even this can be not enough, if you copy the data around during analysis.***
+***Attention: the package contains a huge genetic data set, if you would like to analyse it, make sure you have at least 8 GB free RAM.***
 
-The purpose of this package is the illustration [QTCAT](https://github.com/QTCAT/qtcat) at a real genetic data set with simulated phenotypes.  It allows the user to create phenotype simulation similar to Klasen et al. (under review).
+The purpose of this package is to illustration [QTCAT](https://github.com/QTCAT/qtcat) with real genetic data in combination with simulated phenotypes (similar to Klasen et al.).  It allows a comparison of the results to the true (simulated) gene effects.
 
-This package includes a data set of 1,307 Arabidopsis accessions genotyped for 214,051 SNP (Horton 2012) and functions to simulate phenotypes on top of this data set.
+This package includes a data set of 1,307 Arabidopsis accessions genotyped for 214,051 SNPs (Horton et al. 2012) and functions to simulate phenotypes on top of this data.
 
 ________________________________________________________________________________
 
 ## QTCAT in action
 ### Installation:
-The package can be installed from an R console via devtools (If you haven't yet installed devtools please do so first).
+The package can be installed from an R console via devtools.
 
 ```{R}
 # installation
@@ -20,7 +20,7 @@ devtools::install_github("QTCAT/qtcat.data")
 
 ```
 
-### Simulation of a phenotype:
+### Simulating a phenotype:
 
 ```{R}
 require(qtcat)
@@ -47,21 +47,22 @@ pdat <- normalPheno(snp = snp,             # SNP data object
 
 ```
 
-The SNP data together with phenotype give us a full GWA data set.
+The data are in the following steps analysed in order to find at least some of the phenotype affecting loci we have simulated.
 
 ### QTCAT analysis:
-The first step of the analysis is the clustering of all SNP data.  It can take a substantial amount of time, however, it has to be done only once per SNP data set.  The package includes clustering result for the Arabidopsis SNP data set, which would allows directly moving to the HIT analysis below.
+The first step of the analysis is a hierarchical clustering of all SNPs.  It can take a substantial amount of time, however, it has to be done only once per SNP data set.  The package includes clustering result for the Arabidopsis SNP data, which allows you moving directly forward to the HIT analysis below.
 
 ```{R}
 #------------------------------------------------------------------------------#
 # clustering of the SNPs
-# !!! this step can easily take a day or so if done only at one core
-# data(snpclust) # instead of running the SNP clustering you can load it from the package
+# data(snpclust) # instead of running the SNP clustering you can load pre calculated result 
 snpclust <- qtcatClust(snp = snp)
 
 ```
 
-The actual testing procedure is the HIT algorithm. The function uses a phenotype object containing the actual phenotype and eventual covariates (e.g. environment).  Second a genotype object is needed containing SNP information and indices generated from the clustering.  From this significant QTCs are estimated. The procedure is described in Klasen et al. (under review).
+The actual testing procedure is the HIT algorithm, the function uses a phenotype object, containing the actual phenotype and eventual covariates (e.g. environment).  Furthermore a genotype object is needed which contains the SNPs and indices generated from the clustering. 
+
+Significant QTCs at a specific alpha level can be obtained from the HIT results.  The procedure is described in more detail in Klasen et al.
 
 ```{R}
 #------------------------------------------------------------------------------#
@@ -74,7 +75,7 @@ pheno <- qtcatPheno(names = pdat$pheno$id,
 # create a genotype object for the HIT analysis
 geno <- qtcatGeno(snp = snp,
                   snpClust = snpclust,
-                  min.absCor = 0.3)     # ignor evrthing less  correlated
+                  min.absCor = 0.3)   # ignore everything less correlated than this value
 
 #------------------------------------------------------------------------------#
 ## run the core analysis, the HIT
@@ -83,7 +84,7 @@ hitfit <- qtcatHit(pheno, geno)
 
 ```
 
-The results represents all significant QTCs at a given alpha level.  As QTCAT is a model selection method it is not giving p-values for the non selected SNPs.
+QCAT is a model selection method, therefore it is not, like multiple testing methods, giving p-values for non significant SNPs.  p-values are in addition to the common influences like sample size, effect size, and variance also dependent at the correlation in the data. Interpretation about the importance of a loci only based at the size of the p-values are in this case even more misleading than usual.
 
 ________________________________________________________________________________
 
