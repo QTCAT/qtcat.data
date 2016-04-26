@@ -1,8 +1,10 @@
+
 # QTCAT workflow
 
 ***Attention: the package contains a huge genetic data set, if you would like to analyse it, make sure you have at least 8 GB free RAM.***
 
 The purpose of this package is to illustration [QTCAT](https://github.com/QTCAT/qtcat) with real genetic data in combination with simulated phenotypes (similar to Klasen et al.).  It allows a comparison of the results to the true (simulated) gene effects.
+
 
 This package includes a data set of 1,307 Arabidopsis accessions genotyped for 214,051 SNPs (Horton et al. 2012) and functions to simulate phenotypes on top of this data.
 
@@ -77,6 +79,7 @@ geno <- qtcatGeno(snp = snp,
                   snpClust = snpclust,
                   min.absCor = 0.3)   # ignore everything less correlated than this value
 
+
 #------------------------------------------------------------------------------#
 ## run the core analysis, the HIT
 hitfit <- qtcatHit(pheno, geno)
@@ -90,9 +93,9 @@ ________________________________________________________________________________
 
 __Litriture__
 
-Horton, M. W. et al. Genome-wide patterns of genetic variation in worldwide Arabidopsis thaliana accessions from the RegMap panel. Nat. Genet. 44, 212–216 (2012).
+Klasen et al. A multi-marker association method for genome-wide association studies without the need for population structure correction (under review).
 
-Klasen et al. (under review).
+Horton et al. Genome-wide patterns of genetic variation in worldwide Arabidopsis thaliana accessions from the RegMap panel. Nat. Genet. 44, 212–216 (2012).
 
 ________________________________________________________________________________
 
