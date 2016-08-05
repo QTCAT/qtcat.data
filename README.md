@@ -41,7 +41,7 @@ snpp <- snpProb(gene.pos = t(genepos), snp.pos = getPos(snp))
 
 # phenotype with 50 loci
 pdat <- normalPheno(snp = snp,             # SNP data object
-                    n.rep = 1,             # No. of replication per individual
+                    n.rep = 1,             # No. of replication per individuals
                     n.loci = 50,           # No. of loci affecting phenotype
                     eff.dist = "gaussian", # Dist. from which effects are drawn
                     snp.probs = snpp,      # Probability of SNPs to be selected
@@ -49,7 +49,7 @@ pdat <- normalPheno(snp = snp,             # SNP data object
 
 ```
 
-The data are in the following steps analysed in order to find at least some of the phenotype affecting loci we have simulated.
+The data are in the following steps analysed in order to find at least some of the phenotype effecting loci we have simulated.
 
 ### QTCAT analysis:
 The first step of the analysis is a hierarchical clustering of all SNPs.  It can take a substantial amount of time, however, it has to be done only once per SNP data set.  The package includes clustering result for the Arabidopsis SNP data, which allows you moving directly forward to the HIT analysis below.
@@ -87,7 +87,7 @@ hitfit <- qtcatHit(pheno, geno)
 
 ```
 
-QCAT is a model selection method, therefore it is not, like multiple testing methods, giving p-values for non significant SNPs.  p-values are in addition to the common influences like sample size, effect size, and variance also dependent at the correlation in the data. Interpretation about the importance of a loci only based at the size of the p-values are in this case even more misleading than usual.
+QCAT is a model selection method, in contrast to multiple testing methods it is not giving p-values for non significant SNPs.  p-values are in addition to the common influences like sample size, effect size, and variance also dependent at the correlation in the data. Interpretation about the importance of a loci only based at the size of the p-values are in this case even more misleading than usual.
 
 ________________________________________________________________________________
 
