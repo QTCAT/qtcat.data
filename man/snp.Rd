@@ -4,9 +4,9 @@
 \name{snp}
 \alias{snp}
 \title{An Arabidopsis thaliana SNP data object.}
-\format{SnpData object:
+\format{snpMatrix object:
 \describe{
-  \item{snp}{An object of S4 class \linkS4class{snpData}}
+  \item{snp}{An object of S4 class \linkS4class{snpMatrix}}
 }}
 \source{
 Horton, Matthew W., Angela M. Hancock, Yu S. Huang, Christopher 

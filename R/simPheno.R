@@ -36,7 +36,7 @@ snpProb <- function(gene.pos, snp.pos, bw = 10000) {
 #' Simulates a normal distributed phenotype with effects either normal 
 #' or gamma distributed.
 #' 
-#' @param snp An object of S4 class \linkS4class{snpData}.
+#' @param snp An object of S4 class \linkS4class{snpMatrix}.
 #' @param n.rep Number of replication per individual. For the replication no 
 #' effects at the phenotype are simulated.
 #' @param n.loci Number of loci with effect at the phenotype. 
@@ -48,7 +48,7 @@ snpProb <- function(gene.pos, snp.pos, bw = 10000) {
 #' gamma').
 #' 
 #' @importFrom stats rnorm rgamma
-#' @importFrom qtcat getPos as.matrix
+#' @importFrom qtcat snpInfo as.matrix
 #' @export
 normalPheno <- function(snp, n.rep = 1, n.loci = 50, h2 = .5, snp.probs = NULL,
                         eff.dist = c("gaussian", "gamma"), shape = .5) {
@@ -67,7 +67,7 @@ normalPheno <- function(snp, n.rep = 1, n.loci = 50, h2 = .5, snp.probs = NULL,
   id <- rep(rownames(snp.loci), each = n.rep)
   pheno <- data.frame(id = id, pheno = geno + res, geno = geno, 
                       stringsAsFactors = FALSE)
-  pos <- t(getPos(snp)[, snp.inx])
+  pos <- snpInfo(snp)[snp.inx, 1:2]
   effects <- data.frame(colnames(snp)[snp.inx], pos, loci.eff, 
                         stringsAsFactors = FALSE)
   colnames(effects) <- c("snp", "chr", "pos", "effects")
@@ -99,7 +99,7 @@ rres <- function(n, Va = 1, h2 = .5) {
 # #' Simulates a Bernoulli distributed phenotype with effects either normal
 # #' or gamma distributed.
 # #'
-# #' @param snp An object of S4 class \linkS4class{snpData}.
+# #' @param snp An object of S4 class \linkS4class{snpMatrix}.
 # #' @param n.rep Number of replication per individual. For the replication no
 # #' effects at the phenotype are simulated.
 # #' @param n.loci Number of loci with effect at the phenotype.

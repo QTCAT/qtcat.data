@@ -9,7 +9,7 @@ normalPheno(snp, n.rep = 1, n.loci = 50, h2 = 0.5, snp.probs = NULL,
   eff.dist = c("gaussian", "gamma"), shape = 0.5)
 }
 \arguments{
-\item{snp}{An object of S4 class \linkS4class{snpData}.}
+\item{snp}{An object of S4 class \linkS4class{snpMatrix}.}
 
 \item{n.rep}{Number of replication per individual. For the replication no 
 effects at the phenotype are simulated.}

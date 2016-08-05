@@ -4,9 +4,9 @@
 #' The data required 285 Mb of memory only to be loaded, so make sure your 
 #' memory is big enough. 
 #'
-#' @format SnpData object:
+#' @format snpMatrix object:
 #' \describe{
-#'   \item{snp}{An object of S4 class \linkS4class{snpData}}
+#'   \item{snp}{An object of S4 class \linkS4class{snpMatrix}}
 #' }
 #' @source Horton, Matthew W., Angela M. Hancock, Yu S. Huang, Christopher 
 #' Toomajian, Susanna Atwell, Adam Auton, N. Wayan Muliyati, et al. 2012. 

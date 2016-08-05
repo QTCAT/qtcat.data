@@ -3,7 +3,7 @@
 export(normalPheno)
 export(snpProb)
 importFrom(qtcat,as.matrix)
-importFrom(qtcat,getPos)
+importFrom(qtcat,snpInfo)
 importFrom(stats,approxfun)
 importFrom(stats,density)
 importFrom(stats,rgamma)
