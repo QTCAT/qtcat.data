@@ -3,7 +3,7 @@
 
 ***Attention: the package contains a large genetic data set, in order to analyse it make sure you have at least 8 GB free RAM.***
 
-The purpose of this package is to illustration [QTCAT](https://github.com/QTCAT/qtcat)s functionality (Klasen et al. 2016) on the basis ofreal genetic data and simulated phenotypes.  This approach allows a comparison of the results of the analysis to the true (simulated) gene effects.
+The purpose of this package is to illustration [QTCAT](https://github.com/QTCAT/qtcat)s functionality (Klasen et al. 2016), on the basis of real genetic data and simulated phenotypes.  This approach allows a comparison of the results of the analysis to the true (simulated) gene effects.
 
 
 The package contains a data set of 1,307 Arabidopsis accessions which are genotyped for 214,051 SNPs (Horton et al. 2012) and functions to simulate a phenotype on basis of this data.
@@ -49,7 +49,7 @@ pdat <- normalPheno(snp = snp,             # SNP data object
 
 ```
 
-In order to find at least some of the simulated loci, the data are analysed in the following steps.
+In order to find at least some of the simulated loci, the data are analysed in the following steps using QTCAT.
 
 ### QTCAT analysis:
 The first step of the analysis is a hierarchical clustering of all SNPs.  This can take some time (it has to be done only once per SNP data set).  In order to alow you to move directly forward to the HIT analysis below, the package includes a clustering result for the example data set.
