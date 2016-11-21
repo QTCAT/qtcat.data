@@ -3,7 +3,7 @@
 
 ***Attention: the package contains a large genetic data set, in order to analyse it make sure you have at least 8 GB free RAM.***
 
-The purpose of this package is to illustration [QTCAT](https://github.com/QTCAT/qtcat)s functionality (Klasen et al. 2016), on the basis of real genetic data and simulated phenotypes.  This approach allows a comparison of the results of the analysis to the true (simulated) gene effects.
+The purpose of this package is to illustrat [QTCAT](https://github.com/QTCAT/qtcat)s functionality (Klasen et al. 2016), on the basis of real genetic data and simulated phenotypes.  This approach allows a comparison of QTCATs results to the true (simulated) gene effects.
 
 
 The package contains a data set of 1,307 Arabidopsis accessions which are genotyped for 214,051 SNPs (Horton et al. 2012) and functions to simulate a phenotype on basis of this data.
@@ -64,7 +64,7 @@ snpclust <- qtcatClust(snp = snp)
 
 The main tests is done using the HIT algorithm. The ``qtcatHit``-function uses a phenotype object, containing the actual phenotype and eventual covariates (e.g. environment, replications, ...).  Furthermore a genotype object is needed which contains the SNP data and SNP clustering information. 
 
-Finally significant QTCs at a specific alpha level can be summarized.  The full procedure is described in more detail in Klasen et al. (2016).
+Finally significant Quantitative Trait Clusters (QTCs) at a specific alpha level can be summarized.
 
 ```{R}
 #------------------------------------------------------------------------------#
@@ -87,6 +87,8 @@ hitfit <- qtcatHit(pheno, geno)
 
 ```
 QCAT is a model selection method, in contrast to multiple testing methods it is not giving p-values for non significant SNPs.  p-values are in addition to the common influences, like sample size, effect size, and variance, also dependent at the correlation between SNPs.  Interpretation about the importance of a loci only based at the size of the p-value is even less meaningful than in regression with uncorrelated vaiables.
+
+The full procedure is described in more detail in Klasen et al. (2016).
 
 ________________________________________________________________________________
 
