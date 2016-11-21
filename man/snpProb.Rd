@@ -7,11 +7,11 @@
 snpProb(gene.pos, snp.pos, bw = 10000)
 }
 \arguments{
-\item{gene.pos}{a matrix of two rows. The first row contains the 
-chromosome, the second row contains the position of a gene (e.g. start in bp).}
+\item{gene.pos}{a matrix of two columns. The first column contains the 
+chromosome, the second column contains the position of a gene (e.g. start in bp).}
 
-\item{snp.pos}{a matrix of two rows. the first row contains the 
-chromosome, the second row contains the position of a SNP  bp.}
+\item{snp.pos}{a matrix of two rcolumns. The first column contains the 
+chromosome, the second column contains the position of a SNP in bp.}
 
 \item{bw}{see \code{\link[stats]{density}}.}
 }

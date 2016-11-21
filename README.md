@@ -1,18 +1,18 @@
 
 # QTCAT workflow
 
-***Attention: the package contains a huge genetic data set, if you would like to analyse it, make sure you have at least 8 GB free RAM.***
+***Attention: the package contains a large genetic data set, in order to analyse it make sure you have at least 8 GB free RAM.***
 
-The purpose of this package is to illustration [QTCAT](https://github.com/QTCAT/qtcat) with real genetic data in combination with simulated phenotypes (similar to Klasen et al.).  It allows a comparison of the results to the true (simulated) gene effects.
+The purpose of this package is to illustration [QTCAT](https://github.com/QTCAT/qtcat)s functionality (Klasen et al. 2016) on the basis ofreal genetic data and simulated phenotypes.  This approach allows a comparison of the results of the analysis to the true (simulated) gene effects.
 
 
-This package includes a data set of 1,307 Arabidopsis accessions genotyped for 214,051 SNPs (Horton et al. 2012) and functions to simulate phenotypes on top of this data.
+The package contains a data set of 1,307 Arabidopsis accessions which are genotyped for 214,051 SNPs (Horton et al. 2012) and functions to simulate a phenotype on basis of this data.
 
 ________________________________________________________________________________
 
 ## QTCAT in action
 ### Installation:
-The package can be installed from an R console via devtools.
+The package can be installed from an R console via ``devtools``.
 
 ```{R}
 # installation
@@ -37,34 +37,34 @@ data("genepos")
 # Simulate a phenotype
 
 # gene density to SNP probabilities
-snpp <- snpProb(gene.pos = t(genepos), snp.pos = getPos(snp))
+snpp <- snpProb(gene.pos = genepos, snp.pos = snpInfo(snp)[, 1:2])
 
 # phenotype with 50 loci
 pdat <- normalPheno(snp = snp,             # SNP data object
-                    n.rep = 1,             # No. of replication per individuals
-                    n.loci = 50,           # No. of loci affecting phenotype
-                    eff.dist = "gaussian", # Dist. from which effects are drawn
-                    snp.probs = snpp,      # Probability of SNPs to be selected
-                    h2 = 0.7)              # Heritability of the trait
+                    n.rep = 1,             # No. of replications per individual
+                    n.loci = 50,           # No. of loci affecting the phenotype
+                    eff.dist = "gaussian", # Dist. from which the effects are drawn
+                    snp.probs = snpp,      # Probability for SNPs to be selected as causal
+                    h2 = 0.7)              # Heritability of the simulated phenotype
 
 ```
 
-The data are in the following steps analysed in order to find at least some of the phenotype effecting loci we have simulated.
+In order to find at least some of the simulated loci, the data are analysed in the following steps.
 
 ### QTCAT analysis:
-The first step of the analysis is a hierarchical clustering of all SNPs.  It can take a substantial amount of time, however, it has to be done only once per SNP data set.  The package includes clustering result for the Arabidopsis SNP data, which allows you moving directly forward to the HIT analysis below.
+The first step of the analysis is a hierarchical clustering of all SNPs.  This can take some time (it has to be done only once per SNP data set).  In order to alow you to move directly forward to the HIT analysis below, the package includes a clustering result for the example data set.
 
 ```{R}
 #------------------------------------------------------------------------------#
 # clustering of the SNPs
-# data(snpclust) # instead of running the SNP clustering you can load pre calculated result 
+# data(snpclust) # instead of running the clustering, you can load a pre-calculated result 
 snpclust <- qtcatClust(snp = snp)
 
 ```
 
-The actual testing procedure is the HIT algorithm, the function uses a phenotype object, containing the actual phenotype and eventual covariates (e.g. environment).  Furthermore a genotype object is needed which contains the SNPs and indices generated from the clustering. 
+The main tests is done using the HIT algorithm. The ``qtcatHit``-function uses a phenotype object, containing the actual phenotype and eventual covariates (e.g. environment, replications, ...).  Furthermore a genotype object is needed which contains the SNP data and SNP clustering information. 
 
-Significant QTCs at a specific alpha level can be obtained from the HIT results.  The procedure is described in more detail in Klasen et al.
+Finally significant QTCs at a specific alpha level can be summarized.  The full procedure is described in more detail in Klasen et al. (2016).
 
 ```{R}
 #------------------------------------------------------------------------------#
@@ -86,18 +86,20 @@ hitfit <- qtcatHit(pheno, geno)
 (result <- qtcatQtc(hitfit, alpha = 0.05))
 
 ```
-
-QCAT is a model selection method, in contrast to multiple testing methods it is not giving p-values for non significant SNPs.  p-values are in addition to the common influences like sample size, effect size, and variance also dependent at the correlation in the data. Interpretation about the importance of a loci only based at the size of the p-values are in this case even more misleading than usual.
+QCAT is a model selection method, in contrast to multiple testing methods it is not giving p-values for non significant SNPs.  p-values are in addition to the common influences, like sample size, effect size, and variance, also dependent at the correlation between SNPs.  Interpretation about the importance of a loci only based at the size of the p-value is even less meaningful than in regression with uncorrelated vaiables.
 
 ________________________________________________________________________________
 
 __Litriture__
 
-Klasen et al. A multi-marker association method for genome-wide association studies without the need for population structure correction (under review).
+**Klasen, J. R. et al. (2016)**. *A multi-marker association method for genome-wide 
+association studies without the need for population structure correction*. Nature 
+Communications. [Paper](http://www.nature.com/articles/ncomms13299)
 
-Horton et al. Genome-wide patterns of genetic variation in worldwide Arabidopsis thaliana accessions from the RegMap panel. Nat. Genet. 44, 212–216 (2012).
+**Horton et al. (2012)**. *Genome-wide patterns of genetic variation in worldwide Arabidopsis thaliana 
+accessions from the RegMap panel*. Nat. Genet.
 
 ________________________________________________________________________________
 
 [![License](https://img.shields.io/badge/license-GPL%20%28%3E=%202%29-brightgreen.svg)](https://www.gnu.org/licenses/gpl-2.0.html)
-&copy; 2015 JR Klasen
+&copy; 2016 JR Klasen

@@ -1,28 +1,28 @@
 #' Estimate sample probability for each SNP from gene density
 #' 
-#' @param gene.pos a matrix of two rows. The first row contains the 
-#' chromosome, the second row contains the position of a gene (e.g. start in bp).
-#' @param snp.pos a matrix of two rows. the first row contains the 
-#' chromosome, the second row contains the position of a SNP  bp.
+#' @param gene.pos a matrix of two columns. The first column contains the 
+#' chromosome, the second column contains the position of a gene (e.g. start in bp).
+#' @param snp.pos a matrix of two rcolumns. The first column contains the 
+#' chromosome, the second column contains the position of a SNP in bp.
 #' @param bw see \code{\link[stats]{density}}.
 #' 
 #' @importFrom stats density approxfun
 #' @export
 snpProb <- function(gene.pos, snp.pos, bw = 10000) {
-  stopifnot(nrow(gene.pos) == 2)
-  stopifnot(nrow(snp.pos) == 2)
-  stopifnot(all(!is.null(rownames(snp.pos))))
-  stopifnot(all(!is.null(rownames(gene.pos))))
-  rownames(snp.pos) <- substring(tolower(rownames(snp.pos)), 1, 3)
-  rownames(gene.pos) <- substring(tolower(rownames(gene.pos)), 1, 3)
-  stopifnot(all(rownames(snp.pos) == c("chr", "pos")))
-  stopifnot(all(rownames(gene.pos) == c("chr", "pos")))
-  allchr <-  sort(unique(snp.pos["chr", ]))
-  stopifnot(all(allchr %in% unique(gene.pos["chr", ])))
+  stopifnot(ncol(gene.pos) == 2)
+  stopifnot(ncol(snp.pos) == 2)
+  stopifnot(all(!is.null(colnames(snp.pos))))
+  stopifnot(all(!is.null(colnames(gene.pos))))
+  colnames(snp.pos) <- substring(tolower(colnames(snp.pos)), 1, 3)
+  colnames(gene.pos) <- substring(tolower(colnames(gene.pos)), 1, 3)
+  stopifnot(all(colnames(snp.pos) == c("chr", "pos")))
+  stopifnot(all(colnames(gene.pos) == c("chr", "pos")))
+  allchr <-  sort(unique(snp.pos[, "chr"]))
+  stopifnot(all(allchr %in% unique(gene.pos[, "chr"])))
   snp.probs <- c()
-  for (chr in sort(unique(snp.pos["chr", ]))) {
-    gene.chr <- gene.pos[2, gene.pos[1, ] == chr]
-    snp.chr <- snp.pos[2, snp.pos[1, ] == chr]
+  for (chr in sort(unique(snp.pos[, "chr"]))) {
+    gene.chr <- gene.pos[gene.pos[, "chr"] == chr, "pos"]
+    snp.chr <- snp.pos[snp.pos[, "chr"] == chr, "pos"]
     genedens <- density(gene.chr, bw = bw)
     # a function for linear approxiamtion
     density.approx <- approxfun(genedens$x, genedens$y * length(gene.chr))
@@ -47,7 +47,7 @@ snpProb <- function(gene.pos, snp.pos, bw = 10000) {
 #' @param shape See \code{\link[stats]{rgamma}} (only considered if 'eff.dist = 
 #' gamma').
 #' 
-#' @importFrom stats rnorm rgamma
+#' @importFrom stats rnorm rgamma var
 #' @importFrom qtcat snpInfo as.matrix
 #' @export
 normalPheno <- function(snp, n.rep = 1, n.loci = 50, h2 = .5, snp.probs = NULL,
@@ -82,6 +82,7 @@ normalPheno <- function(snp, n.rep = 1, n.loci = 50, h2 = .5, snp.probs = NULL,
 #' @param Va Genetic variance.
 #' @param h2 Expected heritability.
 #' 
+#' @importFrom stats sd
 #' @keywords internal
 rres <- function(n, Va = 1, h2 = .5) {
   Ve <- Va / h2 - Va
