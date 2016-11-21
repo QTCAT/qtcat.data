@@ -86,7 +86,7 @@ hitfit <- qtcatHit(pheno, geno)
 (result <- qtcatQtc(hitfit, alpha = 0.05))
 
 ```
-QCAT is a model selection method, in contrast to multiple testing methods it is not giving p-values for non significant SNPs.  p-values are in addition to the common influences, like sample size, effect size, and variance, also dependent at the correlation between SNPs.  Interpretation about the importance of a loci only based at the size of the p-value is even less meaningful than in regression with uncorrelated vaiables.
+QCAT is a model selection method, in contrast to multiple testing methods it is not giving p-values for non significant SNPs.  p-values are in addition to the common influences, like sample size, effect size, and variance, also dependent at the correlation between SNPs.  Interpretation about the importance of a locus only based at the size of the p-value is even less meaningful than in regression with uncorrelated vaiables.
 
 The full procedure is described in more detail in Klasen et al. (2016).
 
