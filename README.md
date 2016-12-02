@@ -1,9 +1,9 @@
 
 # QTCAT workflow
 
-***Attention: the package contains a large genetic data set, in order to analyse it make sure you have at least 8 GB free RAM.***
+***Attention: the package contains a large genetic data set, in order to analyse it, make sure you have at least 8 GB of free RAM.***
 
-The purpose of this package is to illustrat [QTCAT](https://github.com/QTCAT/qtcat)s functionality (Klasen et al. 2016), on the basis of real genetic data and simulated phenotypes.  This approach allows a comparison of QTCATs results to the true (simulated) gene effects.
+The purpose of this package is to illustrate [QTCAT](https://github.com/QTCAT/qtcat)s functionality (Klasen et al. 2016), on the basis of real genetic data and simulated phenotypes.  This approach allows a comparison of QTCATs results to the true (simulated) gene effects.
 
 
 The package contains a data set of 1,307 Arabidopsis accessions which are genotyped for 214,051 SNPs (Horton et al. 2012) and functions to simulate a phenotype on basis of this data.
@@ -15,6 +15,7 @@ ________________________________________________________________________________
 The package can be installed from an R console via ``devtools``.
 
 ```{R}
+################################################################################
 # installation
 # install.packages("devtools")
 devtools::install_github("QTCAT/qtcat") 
@@ -52,7 +53,7 @@ pdat <- normalPheno(snp = snp,             # SNP data object
 In order to find at least some of the simulated loci, the data are analysed in the following steps using QTCAT.
 
 ### QTCAT analysis:
-The first step of the analysis is a hierarchical clustering of all SNPs.  This can take some time (it has to be done only once per SNP data set).  In order to alow you to move directly forward to the HIT analysis below, the package includes a clustering result for the example data set.
+The first step of the analysis is a hierarchical clustering of all SNPs.  This can take some time (it has to be done only once per SNP data set).  In order to allow you to move directly forward to the HIT analysis below, the package includes a clustering result for the example data set.
 
 ```{R}
 #------------------------------------------------------------------------------#
@@ -76,23 +77,33 @@ pheno <- qtcatPheno(names = pdat$pheno$id,
 #------------------------------------------------------------------------------#
 # create a genotype object for the HIT analysis
 geno <- qtcatGeno(snp = snp,
-                  snpClust = snpclust,
-                  min.absCor = 0.3)   # ignore everything less correlated than this value
+                  snpClust = snpclust)
 
 
 #------------------------------------------------------------------------------#
-## run the core analysis, the HIT
+# run the core analysis, the HIT
 hitfit <- qtcatHit(pheno, geno)
 (result <- qtcatQtc(hitfit, alpha = 0.05))
 
 ```
-QCAT is a model selection method, in contrast to multiple testing methods it is not giving p-values for non significant SNPs.  p-values are in addition to the common influences, like sample size, effect size, and variance, also dependent at the correlation between SNPs.  Interpretation about the importance of a loci only based at the size of the p-value is even less meaningful than in regression with uncorrelated vaiables.
+QCAT is a model selection method, in contrast to multiple testing methods, it is not giving p-values for non significant SNPs.  p-values are in addition to the common influences, like sample size, effect size, and variance, also dependent at the correlation between SNPs.  Interpretation about the importance of a loci only based at the size of the p-value is even less meaningful than in scenarios without correlated variables.
+
+Visualization of the results can by done with ``plot Qtc``, which shows the detected QTCs at there genomic position.  ``plotSelFreq`` gives the selection frequency per marker in the repeated LASSO selection.
+
+```{R}
+#------------------------------------------------------------------------------#
+# Plot results
+plotQtc(hitfit, alpha = 0.05, pch = 20)
+plotSelFreq(hitfit, pch = 20)
+
+################################################################################
+```
 
 The full procedure is described in more detail in Klasen et al. (2016).
 
 ________________________________________________________________________________
 
-__Litriture__
+### Literature
 
 **Klasen, J. R. et al. (2016)**. *A multi-marker association method for genome-wide 
 association studies without the need for population structure correction*. Nature 
