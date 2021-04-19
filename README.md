@@ -1,5 +1,6 @@
 
 # QTCAT workflow
+This project has no active development and is unmaintained. 
 
 ***Attention: the package contains a large genetic data set, in order to analyse it, make sure you have at least 8 GB of free RAM.***
 
